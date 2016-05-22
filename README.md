@@ -18,6 +18,11 @@ Monitoring information by now:
 * Log: Failed Generate Block
 * Log: Failed Common Block
 * Api: Forging Status	
+* Api: Rank
+* Api: Productivity
+* Api: Produced Blocks
+* Api: Missed Blocks
+* Api: Approval
 * Trigger: LISK Detected a Fork on {HOST.NAME}
 * Trigger: Warning Process LISK is not running {HOST.NAME}
 
@@ -48,3 +53,4 @@ Go to the Macros section and fill in the details
 {$GROUP} <- The zabbix groupname of your Lisk Servers
 {$LISK.LOG} <- Location of your Lisk log on your node
 {$PUBLICKEY} <- Your Lisk publicKey from your Forging account
+{$ADDRESS} <- Your Lisk address from your Forging account
