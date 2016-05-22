@@ -54,3 +54,17 @@ Go to the Macros section and fill in the details
 * {$LISK.LOG} <- Location of your Lisk log on your node
 * {$PUBLICKEY} <- Your Lisk publicKey from your Forging account
 * {$ADDRESS} <- Your Lisk address from your Forging account
+
+
+Requirements
+------------
+
+Debian / Ubuntu / Raspbian
+```
+sudo apt-get install jq
+```
+
+RHEL / CentOS / Fedora
+```
+sudo yum install jq
+```
