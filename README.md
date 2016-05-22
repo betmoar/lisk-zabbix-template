@@ -44,7 +44,7 @@ Apply this new template to your LISK servers.
 
 
 Template Config
-------------
+---------------
 
 From your Zabbix Template view click on the "Template App Lisk Service"
 
@@ -56,8 +56,8 @@ Go to the Macros section and fill in the details
 * {$ADDRESS} <- Your Lisk address from your Forging account
 
 
-Requirements
-------------
+Requirements on your Lisk node
+------------------------------
 
 Debian / Ubuntu / Raspbian
 ```
