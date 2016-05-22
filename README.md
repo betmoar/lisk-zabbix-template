@@ -50,7 +50,7 @@ From your Zabbix Template view click on the "Template App Lisk Service"
 
 Go to the Macros section and fill in the details
 
-{$GROUP} <- The zabbix groupname of your Lisk Servers
-{$LISK.LOG} <- Location of your Lisk log on your node
-{$PUBLICKEY} <- Your Lisk publicKey from your Forging account
-{$ADDRESS} <- Your Lisk address from your Forging account
+* {$GROUP} <- The zabbix groupname of your Lisk Servers
+* {$LISK.LOG} <- Location of your Lisk log on your node
+* {$PUBLICKEY} <- Your Lisk publicKey from your Forging account
+* {$ADDRESS} <- Your Lisk address from your Forging account
