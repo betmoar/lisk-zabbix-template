@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.0</version>
-    <date>2016-05-22T01:20:31Z</date>
+    <date>2016-05-27T08:27:03Z</date>
     <groups>
         <group>
             <name>Lisk Servers</name>
@@ -11,7 +11,7 @@
         <template>
             <template>Template App Lisk Service</template>
             <name>Template App Lisk Service</name>
-            <description>Zabbix Template for your Lisk Node</description>
+            <description>Zabbix Template for monitoring your Lisk Node</description>
             <groups>
                 <group>
                     <name>Lisk Servers</name>
@@ -33,15 +33,15 @@
             </applications>
             <items>
                 <item>
-                    <name>Stats: Forging Enabled</name>
+                    <name>Cluster: Forging Enabled</name>
                     <type>8</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>grpsum[&quot;{$GROUP}&quot;,&quot;{$FORGING.STATUS}&quot;,last]</key>
-                    <delay>10</delay>
-                    <history>7</history>
-                    <trends>30</trends>
+                    <key>grpsum[&quot;{$ZABBIX.GROUP}&quot;,&quot;{$LISK.FORGING}&quot;,last]</key>
+                    <delay>30</delay>
+                    <history>1</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -76,15 +76,15 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Api: Approval</name>
+                    <name>Api: Approval Percentage</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>lisk.approval[{$ADDRESS}]</key>
-                    <delay>60</delay>
+                    <key>lisk.approval[{$LISK.ADDRESS},{$LISK.PORT}]</key>
+                    <delay>600</delay>
                     <history>7</history>
-                    <trends>30</trends>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
@@ -119,15 +119,15 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Stats: Blocks Forged Per Minute</name>
+                    <name>Stats: Avg Blocks P/M</name>
                     <type>15</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>lisk.blocks.fpm</key>
-                    <delay>10</delay>
-                    <history>7</history>
-                    <trends>30</trends>
+                    <key>lisk.blocks.pm</key>
+                    <delay>60</delay>
+                    <history>1</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
@@ -142,7 +142,7 @@
                     <snmpv3_privpassphrase/>
                     <formula>1</formula>
                     <delay_flex/>
-                    <params>count(&quot;log[{$LISK.LOG},[Received new block],,,skip,]&quot;,60,&quot;Received&quot;,&quot;like&quot;)</params>
+                    <params>change(&quot;lisk.status.sync[height,{$LISK.PORT}]&quot;)</params>
                     <ipmi_sensor/>
                     <data_type>0</data_type>
                     <authtype>0</authtype>
@@ -151,7 +151,7 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Blocks Forged Per Minute</description>
+                    <description>Avarage Blocks Forged Per Minute</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -167,10 +167,10 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>lisk.forging.status[{$PUBLICKEY}]</key>
-                    <delay>60</delay>
+                    <key>lisk.forging.status[{$LISK.PUBLICKEY},{$LISK.PORT}]</key>
+                    <delay>30</delay>
                     <history>7</history>
-                    <trends>30</trends>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -210,10 +210,10 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>lisk.missedblocks[{$ADDRESS}]</key>
-                    <delay>60</delay>
+                    <key>lisk.missedblocks[{$LISK.ADDRESS},{$LISK.PORT}]</key>
+                    <delay>30</delay>
                     <history>7</history>
-                    <trends>30</trends>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
@@ -253,10 +253,10 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>lisk.producedblocks[{$ADDRESS}]</key>
-                    <delay>60</delay>
+                    <key>lisk.producedblocks[{$LISK.ADDRESS},{$LISK.PORT}]</key>
+                    <delay>30</delay>
                     <history>7</history>
-                    <trends>30</trends>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
@@ -291,15 +291,15 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Api: Productivity</name>
+                    <name>Api: Node Productivity</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>lisk.productivity[{$ADDRESS}]</key>
-                    <delay>60</delay>
+                    <key>lisk.productivity[{$LISK.ADDRESS},{$LISK.PORT}]</key>
+                    <delay>600</delay>
                     <history>7</history>
-                    <trends>30</trends>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
@@ -334,15 +334,101 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Api: Rank</name>
+                    <name>Api: Delegate Rank</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>lisk.rank[{$ADDRESS}]</key>
-                    <delay>60</delay>
+                    <key>lisk.rank[{$LISK.ADDRESS},{$LISK.PORT}]</key>
+                    <delay>600</delay>
                     <history>7</history>
-                    <trends>30</trends>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Lisk API</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Api: Status Sync [Blocks]</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>lisk.status.sync[blocks,{$LISK.PORT}]</key>
+                    <delay>60</delay>
+                    <history>1</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Number of blocks remaining to sync.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Lisk API</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Api: Status Sync [Height]</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>lisk.status.sync[height,{$LISK.PORT}]</key>
+                    <delay>60</delay>
+                    <history>1</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
@@ -555,7 +641,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>log[{$LISK.LOG},[Received new block],,,skip,]</key>
-                    <delay>10</delay>
+                    <delay>60</delay>
                     <history>1</history>
                     <trends>0</trends>
                     <status>0</status>
@@ -581,7 +667,7 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Received new block</description>
+                    <description>Lisk: New Block</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -589,7 +675,7 @@
                         </application>
                     </applications>
                     <valuemap/>
-                    <logtimefmt/>
+                    <logtimefmt>pppp yyyy-MM-dd hh:mm:ss</logtimefmt>
                 </item>
                 <item>
                     <name>Process: Memory Usage</name>
@@ -600,7 +686,7 @@
                     <key>proc.mem[node,,,,rss]</key>
                     <delay>60</delay>
                     <history>7</history>
-                    <trends>30</trends>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
@@ -643,7 +729,7 @@
                     <key>proc.num[,,,node]</key>
                     <delay>60</delay>
                     <history>7</history>
-                    <trends>30</trends>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -681,24 +767,28 @@
             <discovery_rules/>
             <macros>
                 <macro>
+                    <macro>{$LISK.ADDRESS}</macro>
+                    <value>YOURFORGINGADDRES</value>
+                </macro>
+                <macro>
+                    <macro>{$LISK.FORGING}</macro>
+                    <value>lisk.forging.status[{$LISK.PUBLICKEY},{$LISK.PORT}]</value>
+                </macro>
+                <macro>
                     <macro>{$LISK.LOG}</macro>
-                    <value>/full/path/to/lisk/logs.log</value>
+                    <value>/dir/to/lisk/app.log</value>
                 </macro>
                 <macro>
-                    <macro>{$PUBLICKEY}</macro>
-                    <value>yourpublickey</value>
+                    <macro>{$LISK.PORT}</macro>
+                    <value>8000</value>
                 </macro>
                 <macro>
-                    <macro>{$GROUP}</macro>
+                    <macro>{$LISK.PUBLICKEY}</macro>
+                    <value>yourliskpublickey</value>
+                </macro>
+                <macro>
+                    <macro>{$ZABBIX.GROUP}</macro>
                     <value>Lisk Servers</value>
-                </macro>
-                <macro>
-                    <macro>{$FORGING.STATUS}</macro>
-                    <value>lisk.forging.status[{$PUBLICKEY}]</value>
-                </macro>
-                <macro>
-                    <macro>{$ADDRESS}</macro>
-                    <value>youraddress</value>
                 </macro>
             </macros>
             <templates/>
@@ -724,14 +814,14 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Lisk Mem Usage</name>
+                                <name>Lisk Memory Usage</name>
                                 <host>Template App Lisk Service</host>
                             </resource>
                             <max_columns>3</max_columns>
                             <application/>
                         </screen_item>
                         <screen_item>
-                            <resourcetype>1</resourcetype>
+                            <resourcetype>0</resourcetype>
                             <width>500</width>
                             <height>100</height>
                             <x>1</x>
@@ -746,14 +836,14 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <key>lisk.forging.status[{$PUBLICKEY}]</key>
+                                <name>Forging Enabled</name>
                                 <host>Template App Lisk Service</host>
                             </resource>
                             <max_columns>3</max_columns>
                             <application/>
                         </screen_item>
                         <screen_item>
-                            <resourcetype>0</resourcetype>
+                            <resourcetype>1</resourcetype>
                             <width>500</width>
                             <height>100</height>
                             <x>0</x>
@@ -768,7 +858,7 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Blocks Forged Per Minute</name>
+                                <key>lisk.producedblocks[{$LISK.ADDRESS},{$LISK.PORT}]</key>
                                 <host>Template App Lisk Service</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -790,7 +880,73 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <key>proc.num[,,,node]</key>
+                                <key>lisk.missedblocks[{$LISK.ADDRESS},{$LISK.PORT}]</key>
+                                <host>Template App Lisk Service</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>1</resourcetype>
+                            <width>500</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>2</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <key>lisk.approval[{$LISK.ADDRESS},{$LISK.PORT}]</key>
+                                <host>Template App Lisk Service</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>1</resourcetype>
+                            <width>500</width>
+                            <height>100</height>
+                            <x>1</x>
+                            <y>2</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <key>lisk.rank[{$LISK.ADDRESS},{$LISK.PORT}]</key>
+                                <host>Template App Lisk Service</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>500</width>
+                            <height>100</height>
+                            <x>1</x>
+                            <y>3</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Productivity</name>
                                 <host>Template App Lisk Service</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -803,59 +959,57 @@
     </templates>
     <triggers>
         <trigger>
-            <expression>{Template App Lisk Service:log[{$LISK.LOG},(cause\&quot;:3),,,skip,].nodata(60)}=0</expression>
-            <name>LISK Detected a Fork on {HOST.NAME}</name>
-            <url>{HOST.NAME}:7000</url>
+            <expression>{Template App Lisk Service:lisk.missedblocks[{$LISK.ADDRESS},{$LISK.PORT}].change()}&gt;0</expression>
+            <name>Api: Missed Block on {HOST.NAME}</name>
+            <url>{HOST.NAME}:{$LISK.PORT}</url>
             <status>0</status>
-            <priority>1</priority>
+            <priority>4</priority>
+            <description>{$ADDRESS} failed to generate a block on {HOST.NAME}</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template App Lisk Service:grpsum[&quot;{$ZABBIX.GROUP}&quot;,&quot;{$LISK.FORGING}&quot;,last].last()}&gt;1</expression>
+            <name>Cluster: Forging Nodes &gt; 1</name>
+            <url>{HOST.NAME}:{$LISK.PORT}</url>
+            <status>0</status>
+            <priority>2</priority>
+            <description>Forging active on more then 1 node.</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template App Lisk Service:log[{$LISK.LOG},[Failed generate],,,skip,].nodata(60)}=0</expression>
+            <name>Log: Failed Generate Block on {HOST.NAME}</name>
+            <url>{HOST.NAME}:{$LISK.PORT}</url>
+            <status>0</status>
+            <priority>4</priority>
+            <description>Log detected {HOST.NAME} failed to generate a block.</description>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template App Lisk Service:log[{$LISK.LOG},(cause\&quot;:3),,,skip,].nodata(60)}=0</expression>
+            <name>Log: Fork Detected on {HOST.NAME}</name>
+            <url>{HOST.NAME}:{$LISK.PORT}</url>
+            <status>0</status>
+            <priority>4</priority>
             <description/>
             <type>0</type>
             <dependencies/>
         </trigger>
         <trigger>
             <expression>{Template App Lisk Service:proc.num[,,,node].last(0)}=0</expression>
-            <name>Process LISK is not running {HOST.NAME}</name>
-            <url>{HOST.NAME}:7000</url>
+            <name>Process: Lisk is not running on {HOST.NAME}</name>
+            <url>{HOST.NAME}:{$LISK.PORT}</url>
             <status>0</status>
-            <priority>2</priority>
+            <priority>4</priority>
             <description/>
             <type>0</type>
             <dependencies/>
         </trigger>
     </triggers>
     <graphs>
-        <graph>
-            <name>Blocks Forged Per Minute</name>
-            <width>500</width>
-            <height>200</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>0</show_triggers>
-            <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>0</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>5</drawtype>
-                    <color>1A7C11</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>7</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Lisk Service</host>
-                        <key>lisk.blocks.fpm</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
         <graph>
             <name>Forging Enabled</name>
             <width>500</width>
@@ -879,17 +1033,17 @@
                     <drawtype>0</drawtype>
                     <color>1A7C11</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>9</calc_fnc>
+                    <calc_fnc>2</calc_fnc>
                     <type>2</type>
                     <item>
                         <host>Template App Lisk Service</host>
-                        <key>lisk.forging.status[{$PUBLICKEY}]</key>
+                        <key>lisk.forging.status[{$LISK.PUBLICKEY},{$LISK.PORT}]</key>
                     </item>
                 </graph_item>
             </graph_items>
         </graph>
         <graph>
-            <name>Lisk Mem Usage</name>
+            <name>Lisk Memory Usage</name>
             <width>500</width>
             <height>200</height>
             <yaxismin>0.0000</yaxismin>
@@ -908,7 +1062,7 @@
             <graph_items>
                 <graph_item>
                     <sortorder>0</sortorder>
-                    <drawtype>2</drawtype>
+                    <drawtype>5</drawtype>
                     <color>1A7C11</color>
                     <yaxisside>0</yaxisside>
                     <calc_fnc>2</calc_fnc>
@@ -916,6 +1070,38 @@
                     <item>
                         <host>Template App Lisk Service</host>
                         <key>proc.mem[node,,,,rss]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Productivity</name>
+            <width>500</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>0.0000</yaxismax>
+            <show_work_period>0</show_work_period>
+            <show_triggers>0</show_triggers>
+            <type>2</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>1A7C11</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template App Lisk Service</host>
+                        <key>lisk.productivity[{$LISK.ADDRESS},{$LISK.PORT}]</key>
                     </item>
                 </graph_item>
             </graph_items>
