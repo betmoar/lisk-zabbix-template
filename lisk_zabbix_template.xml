@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.0</version>
-    <date>2016-05-27T08:27:03Z</date>
+    <date>2016-05-29T10:02:13Z</date>
     <groups>
         <group>
             <name>Lisk Servers</name>
@@ -463,6 +463,49 @@
                     <logtimefmt/>
                 </item>
                 <item>
+                    <name>Log: Received New Block</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>log[{$LISK.APPLOG},[Received new block],,,skip,]</key>
+                    <delay>60</delay>
+                    <history>1</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>2</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Lisk: New Block</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Lisk Log Check</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt>pppp yyyy-MM-dd hh:mm:ss</logtimefmt>
+                </item>
+                <item>
                     <name>Log: Fork Detected</name>
                     <type>7</type>
                     <snmp_community/>
@@ -635,49 +678,6 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Log: Received New Block</name>
-                    <type>7</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>log[{$LISK.LOG},[Received new block],,,skip,]</key>
-                    <delay>60</delay>
-                    <history>1</history>
-                    <trends>0</trends>
-                    <status>0</status>
-                    <value_type>2</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Lisk: New Block</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Lisk Log Check</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt>pppp yyyy-MM-dd hh:mm:ss</logtimefmt>
-                </item>
-                <item>
                     <name>Process: Memory Usage</name>
                     <type>0</type>
                     <snmp_community/>
@@ -771,12 +771,16 @@
                     <value>YOURFORGINGADDRES</value>
                 </macro>
                 <macro>
+                    <macro>{$LISK.APPLOG}</macro>
+                    <value>/dir/to/lisk/app.log</value>
+                </macro>
+                <macro>
                     <macro>{$LISK.FORGING}</macro>
                     <value>lisk.forging.status[{$LISK.PUBLICKEY},{$LISK.PORT}]</value>
                 </macro>
                 <macro>
                     <macro>{$LISK.LOG}</macro>
-                    <value>/dir/to/lisk/app.log</value>
+                    <value>/dir/to/lisk/logs.log</value>
                 </macro>
                 <macro>
                     <macro>{$LISK.PORT}</macro>
@@ -1004,6 +1008,16 @@
             <url>{HOST.NAME}:{$LISK.PORT}</url>
             <status>0</status>
             <priority>4</priority>
+            <description/>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template App Lisk Service:lisk.blocks.pm.max(600)}=0</expression>
+            <name>Stats: Lisk Block Height on {HOST.NAME} is unchanged for 10 minutes</name>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
             <description/>
             <type>0</type>
             <dependencies/>

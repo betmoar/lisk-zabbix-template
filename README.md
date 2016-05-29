@@ -16,11 +16,11 @@ Monitoring information by now:
 * Api: Produced Blocks
 * Api: Status Sync [Blocks]
 * Api: Status Sync [Height]
-* Log: Received New Block
-* Log: Fork Detected
-* Log: Forged New Block
-* Log: Failed Generate Block
-* Log: Failed Common Block
+* Log: Received New Block (timestamped blocks from app.log)
+* Log: Fork Detected (logs.log)
+* Log: Forged New Block (logs.log)
+* Log: Failed Generate Block (logs.log)
+* Log: Failed Common Block (logs.log)
 * Process: Memory Usage
 * Process: Lisk Status
 * Cluster: Forging Enabled (aggregated check)
@@ -30,6 +30,7 @@ Monitoring information by now:
 * Trigger: Log: Failed Generate Block on {HOST.NAME}
 * Trigger: Log: Fork Detected on {HOST.NAME}
 * Trigger: Process: Lisk is not running on {HOST.NAME}
+* Trigger: Stats: Lisk Block Height on {HOST.NAME} is unchanged for last 10 minutes
 
 Todo:
 * Better included graphs and a extend monitoring screen
@@ -61,8 +62,9 @@ From your Zabbix Template view click on the "Template App Lisk Service"
 Go to the Macros section and fill in the details where needed
 
 * {$LISK.ADDRESS} <- Your Lisk address from your Forging account
+* {$LISK.APPLOG} <- Location of your Lisk app.log on your node
 * {$LISK.FORGING} <- Used for aggregated check # nodes forging enabled (dont change!)
-* {$LISK.LOG} <- Location of your Lisk log on your node
+* {$LISK.LOG} <- Location of your Lisk logs.log on your node
 * {$LISK.PORT} <- The port LISK is running on (default 8000 for mainnet)
 * {$LISK.PUBLICKEY} <- Your Lisk publicKey from your Forging account
 * {$ZABBIX.GROUP} <- The zabbix groupname of your Lisk Servers
